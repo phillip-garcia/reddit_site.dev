@@ -12,8 +12,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = \App\Post::all();
-        // dd($posts);
+        $posts = \App\Post::paginate(4);
         return view('posts.index', ['posts' => $posts]);
     }
     /**
@@ -33,6 +32,8 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, \App\Post::$rules);
         $post = new  \App\Post();
         $post->title = $request->input('title');
         $post->url= $request->input('url');
@@ -61,7 +62,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        return 'You can edit post on this page';
+        $post = \App\Post::find($id);
+        return view('posts.edit', ['post' => $post]);
     }
     /**
      * Update the specified resource in storage.
@@ -72,7 +74,13 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'Update a specific post';
+        $this->validate($request, \App\Post::$rules);
+        $post = \App\Post::find($id);
+        $post->title = $request->input('title');
+        $post->url= $request->input('url');
+        $post->content  = $request->input('content');
+        $post->save();
+        return redirect()->action('PostsController@index');
     }
     /**
      * Remove the specified resource from storage.
