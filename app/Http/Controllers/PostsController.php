@@ -12,7 +12,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts');
+        $posts = \App\Post::all();
+        // dd($posts);
+        return view('posts.index', ['posts' => $posts]);
     }
     /**
      * Show the form for creating a new resource.
@@ -21,7 +23,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return 'This will be a form to create posts';
+        return view('posts.create');
     }
     /**
      * Store a newly created resource in storage.
@@ -31,7 +33,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        return 'We are storing this post';
+        $post = new  \App\Post();
+        $post->title = $request->input('title');
+        $post->url= $request->input('url');
+        $post->content  = $request->input('content');
+        $post->user_id = 1;
+        $post->save();
+        return redirect()->action('PostsController@index');
     }
     /**
      * Display the specified resource.
@@ -41,7 +49,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return 'We are showing you a post tied to an id';
+        $post = \App\Post::find($id);
+        // dd($data);
+        return view('posts.show', ['post' => $post]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +82,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        return 'Throwing post in the trash';
+        $post = \App\Post::find($id);
+        $post->delete();
     }
 }

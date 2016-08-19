@@ -12,7 +12,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/sayhello/{name?}', function ($name = 'Class')
+Route::get('/sayhello/{name?}', function ($name = 'World')
 {
     return 'Hello ' . $name . '!';
 });
