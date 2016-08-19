@@ -14,12 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/sayhello/{name?}', function($name =  'World')
+Route::get('/sayhello/{name}', function($name)
 {
-    if ($name == "Thomas") {
-        return redirect('/');
+    if ($name == "Chris") {
+        return Redirect::to('/');
     }
-    return "Hello, $name!";
+
+    $data = array('name' => $name);
+    return view('my-first-view', $data);
 });
 Route::get('/uppercase/{word?}', function($word = 'WORD')
 {
@@ -35,4 +37,11 @@ Route::get('/add/{number1}/{number2}', function($number1, $number2)
 {
     $sum = $number1 + $number2;
     return "The sum of $number1 and $number2 is $sum";
+});
+Route::get('/rolldice/{guess?}', function ($guess)
+    {
+        $data = ['number' => rand(1, 6),
+     			'guess' => $guess
+         	];
+ 	    return view('roll-dice', $data);
 });
