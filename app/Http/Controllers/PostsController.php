@@ -1,12 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 class PostsController extends Controller
 {
     /**
@@ -18,7 +14,6 @@ class PostsController extends Controller
     {
         return view('posts');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,9 +21,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return 'This will be a form to create posts';
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -37,9 +31,8 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'We are storing this post';
     }
-
     /**
      * Display the specified resource.
      *
@@ -48,9 +41,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'We are showing you a post tied to an id';
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -59,9 +51,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 'You can edit post on this page';
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -71,9 +62,8 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return 'Update a specific post';
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -82,7 +72,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'Throwing post in the trash';
     }
 }
-?>
