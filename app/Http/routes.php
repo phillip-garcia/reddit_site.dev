@@ -16,18 +16,10 @@ Route::get('/sayhello/{name?}', function ($name = 'Class')
 {
     return 'Hello ' . $name . '!';
 });
-Route::get('/uppercase/{word}', 'HomeController@capsWord');
-Route::get('/math/{number}', 'HomeController@math');
-Route::get('/add/{number1?}/{number2?}', function ($number1, $number2)
+Route::get('/uppercase/{word?}', 'HomeController@capsWord');
+Route::get('/math/{number?}', 'HomeController@math');
+Route::get('/add/{number1}/{number2}', function ($number1, $number2)
 {
     return $number1 + $number2;
 });
-Route::get('/rolldice/{guess}', function ($guess)
-{
-    $data = ['number' => rand(1, 6),
-        'guess' => $guess
-    ];
-    return view('rolldice', $data);
-    // can also return data like this
-    // return view('roll-dice')->with($data);
-});
+Route::get('/rolldice/{guess?}', 'HomeController@rollDice');
