@@ -1,31 +1,24 @@
 @extends('layouts.master')
 
 @section('content')
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>URL</th>
-            <th>Content</th>
-            <th>Created</th>
-            <th>Updated</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($posts as $post)
-            <tr>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->url }}</td>
-                <td>{{ $post->content }}</td>
-                <td>{{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A') }}</td>
-                <td>{{ $post->updated_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A') }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="5" class="text-center">{!! $posts->render() !!}</td>
-        </tr>
-        </tfoot>
-    </table>
+    @if (session()->has('success_message'))
+        <div class="alert alert-success">{{ session('success_message') }}</div>
+    @endif
+
+    <h1 class="text-center">{{ $page_title }}</h1>
+
+    @foreach($posts as $post)
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <a href="{{ action('PostsController@show', $post->id) }}"><h3>{{ $post->title }}</h3></a>
+                <p class="postStats">{{ $post->created_at->format('l, F jS Y @ h:i:s A') }}&nbsp;&nbsp;//&nbsp;&nbsp;Posted By {{ $post->user->name }} </p>
+                <p>{{ str_limit($post->content, 200) }}</p>
+            </div>
+        </div>
+        <hr>
+    @endforeach
+
+    <div class="text-center">
+        {!! $posts->render() !!}
+    </div>
 @stop

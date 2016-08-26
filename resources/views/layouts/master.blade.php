@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Reddit</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    @include('partials.head')
 </head>
 <body>
+<header class="row">
+    @include('partials.header')
+</header>
     <div class="container">
+
+
+        <div id="main" class="row">
+
         @yield('content')
+        @if (session()->has('message'))
+            <div class="alert alert-success">{{ session('successMessage') }}</div>
+        @endif
+        </div>
+
     </div>
 </body>
 </html>

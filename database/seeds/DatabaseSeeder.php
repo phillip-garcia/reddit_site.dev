@@ -14,7 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        $this->command->info('Deleted posts records');
+        DB::table('posts')->delete();
+        $this->command->info('Deleted users records');
+        DB::table('users')->delete();
+        $this->call(UserTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
 
         Model::reguard();
     }

@@ -22,4 +22,7 @@ class HomeController extends Controller
         ];
         return view('rolldice', $data);
     }
+    public function home(){
+        return view('/home');
+    }
 }

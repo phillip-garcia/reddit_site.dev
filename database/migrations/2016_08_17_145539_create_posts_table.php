@@ -16,8 +16,10 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('url');
             $table->text('content');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('vote_score');
+            $table->integer('created_by')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     /**
